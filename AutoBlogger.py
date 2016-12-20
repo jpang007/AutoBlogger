@@ -39,15 +39,18 @@ def main():
     time.sleep(3)
 
     driver.get('https://www.tumblr.com/login')
-
-    tumblrUser = driver.find_element_by_id("signup_determine_email").send_keys("USERNAME")
+    print "What is your username?"
+    usernameInput = input()
+    print "Password?"
+    passwordInput = input()
+    tumblrUser = driver.find_element_by_id("signup_determine_email").send_keys(usernameInput)
     driver.find_element_by_id("signup_forms_submit").click()
     time.sleep(3)
     driver.find_element_by_id("login-signin").click()
     time.sleep(3)
     password = driver.find_element_by_id('login-passwd')
     time.sleep(3)
-    password.send_keys('PASSWORD')
+    password.send_keys(passwordInput)
     driver.find_element_by_id("login-signin").click()
     time.sleep(5)
 
@@ -64,8 +67,8 @@ def main():
 
     print "Now that all files are uploaded let's clear the files!"
 
-    #for dataRank in range(1,10):
-    #    os.remove("file" + str(dataRank) + ".jpg")
+    for dataRank in range(1,10):
+        os.remove("file" + str(dataRank) + ".jpg")
 
     #os.kill(driver, signal.SIGTERM)
 
