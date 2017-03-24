@@ -30,19 +30,25 @@ def main():
             src = i.get_attribute("data-url")
             print src
             resource = urllib.urlopen(src)
-            filename = "file" + str(dataRank) + ".jpg"
-            output = open(filename,"wb")
-            output.write(resource.read())
-            output.close()
+            print src[-4:]
+            if src[-4:] == ".jpg": #Play safe and only download images with a .jpg
+                filename = "file" + str(dataRank) + ".jpg"
+                output = open(filename,"wb")
+                output.write(resource.read())
+                output.close()
+            else:
+                pass
         print "dataRank: " + str(dataRank)
 
     time.sleep(3)
 
     driver.get('https://www.tumblr.com/login')
+
     print "What is your username?"
-    usernameInput = input()
+    usernameInput = ""
     print "Password?"
-    passwordInput = input()
+    passwordInput = ""
+
     tumblrUser = driver.find_element_by_id("signup_determine_email").send_keys(usernameInput)
     driver.find_element_by_id("signup_forms_submit").click()
     time.sleep(3)
@@ -75,7 +81,8 @@ def main():
     end=time.clock()
     maintime=end-start
     print ("Auto Blogger timing: "+str(maintime)) + " seconds."
-    time.sleep(100) # Let the user actually see something!
+    print ("All finished!")
+    time.sleep(10) # Let the user actually see something!
     driver.quit()
 
 main()
